@@ -1,0 +1,11 @@
+﻿.App {
+    text-align: center;
+    font-family: sans-serif;
+    padding: 2rem;
+}
+
+header {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}

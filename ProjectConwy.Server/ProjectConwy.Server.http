@@ -1,0 +1,6 @@
+@ProjectConwy.Server_HostAddress = http://localhost:5133
+
+GET {{ProjectConwy.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
