@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import MainPage from "./MainPage";
 
-function App() {
+
+
+
+
+function App({pca}) {
     return (
-
-
-
-        <div className="App">
-            <header>
-                <h1>Welcome to Project Conwy</h1>
-            </header>
-            <main>
-                <p>This is where the fun begins.</p>
-            </main>
-        </div>
+        <MsalProvider instance={pca}>
+        <MainPage />
+        </MsalProvider>
+            
     );
 }
 

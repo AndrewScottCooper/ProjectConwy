@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Custom: auth config
+authConfig.jsx
+package-lock.json
+.env
