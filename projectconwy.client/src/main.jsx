@@ -8,14 +8,17 @@ import { msalConfig } from './authConfig';
 const pca = new PublicClientApplication(msalConfig);
 
 
-pca.initialize().then(() => {
-    return pca.handleRedirectPromise();
-}).then(() => {
-    ReactDOM.createRoot(document.getElementById('root')).render(
-        <React.StrictMode>
-            <App pca={pca} />
-        </React.StrictMode>
-    );
-}).catch(error => {
-    console.error("MSAL initialization failed", error);
-});
+
+async function bootstrap() {
+    try {
+        ReactDOM.createRoot(document.getElementById("root")).render(
+            <React.StrictMode>
+                <App pca={pca} />
+            </React.StrictMode>
+        );
+    } catch (err) {
+        console.error("MSAL initialization failed", err);
+    }
+}
+
+bootstrap();
