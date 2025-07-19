@@ -1,10 +1,15 @@
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "./authConfig";
 import { useEffect, useState } from "react";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import Map from "./components/Map";
+import About from "./components/About";
 
 export default function MainPage() {
     const { instance, accounts } = useMsal();
     const [hasRedirectBeenHandled, setHasRedirectBeenHandled] = useState(false);
+    const [activeComponent, setActiveComponent] = useState('home');
 
     useEffect(() => {
         instance.handleRedirectPromise().then(response => {
@@ -33,13 +38,19 @@ export default function MainPage() {
         return <p>Redirecting to Microsoft Login...</p>;
     }
 
+    const RenderMainContent = () => {
+        switch (activeComponent) {
+            case 'home': return <Home />;
+            case 'map': return <Map />;
+            default: return < Home />;
+        }
+    };
+
     return (
         <div className="App">
-            <header>
-                <h1>Welcome to Project Conwy</h1>
-            </header>
-            <main>
-                <p>This is where the fun begins.</p>
+            <NavBar onSelect={setActiveComponent} />
+            <main style={{ flex: 1, padding: '1rem' }}>
+                {RenderMainContent()}
             </main>
         </div>);
 }
