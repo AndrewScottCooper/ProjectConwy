@@ -1,12 +1,20 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+
 
 export default function Navbar({ onSelect }) {
     return (
         <nav style={{ width: "200px", background: "#eee", padding: "1rem" }} >
             <ul>
-                <li><button onClick={() => onSelect('home')}>Home</button></li>
-                <li><button onClick={() => onSelect('map')}>Maps</button></li>
-                <li><button onClick={() => onSelect('about')}>About</button></li>
+                <li> <Button
+                    variant="contained"
+                    onClick={() => onSelect('home')}
+                >
+                    Home
+                </Button></li>
+
+                <li><Button onClick={() => onSelect('map')}>Maps</Button></li>
+                <li><Button onClick={() => onSelect('about')}>About</Button></li>
             </ul>
          </nav>
     )

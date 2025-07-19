@@ -8,9 +8,9 @@ import { msalConfig } from './authConfig';
 const pca = new PublicClientApplication(msalConfig);
 
 
-
 async function bootstrap() {
     try {
+        await pca.initialize(); 
         ReactDOM.createRoot(document.getElementById("root")).render(
             <React.StrictMode>
                 <App pca={pca} />

@@ -42,6 +42,7 @@ export default function MainPage() {
         switch (activeComponent) {
             case 'home': return <Home />;
             case 'map': return <Map />;
+            case 'about': return <About/>
             default: return < Home />;
         }
     };
