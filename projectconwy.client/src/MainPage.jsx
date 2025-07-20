@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Map from "./components/Map";
 import About from "./components/About";
+import './App.css';
 
 export default function MainPage() {
     const { instance, accounts } = useMsal();
@@ -48,10 +49,13 @@ export default function MainPage() {
     };
 
     return (
-        <div className="App">
+        <div className="app_container">
             <NavBar onSelect={setActiveComponent} />
-            <main style={{ flex: 1, padding: '1rem' }}>
-                {RenderMainContent()}
+            <main className="main_content">
+                <div className="page_container">
+                    {RenderMainContent()}
+                </div>
             </main>
-        </div>);
+        </div>
+    );
 }
