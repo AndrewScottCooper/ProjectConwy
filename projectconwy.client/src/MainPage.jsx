@@ -5,6 +5,8 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Map from "./components/Map";
 import About from "./components/About";
+import HomeEsitma from "./components/HomeEstimates";
+import Machine from "./components/MachineLearning";
 import './App.css';
 
 export default function MainPage() {
@@ -43,6 +45,8 @@ export default function MainPage() {
         switch (activeComponent) {
             case 'home': return <Home />;
             case 'map': return <Map />;
+            case 'homeestimates': return <HomeEsitma />;
+            case 'machinelearning': return <Machine />;
             case 'about': return <About/>
             default: return < Home />;
         }
