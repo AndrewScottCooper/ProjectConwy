@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import StateBoundary from './map_components/StateBoundary';
 //import L from 'leaflet';
 //import { useEffect, useState } from 'react';
 
@@ -24,7 +25,7 @@ export default function Map() {
                     attribution="Scott Cooper 2025"
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                
+                <StateBoundary />
             </MapContainer>
         </div>
 
