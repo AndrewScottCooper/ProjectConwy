@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { GeoJSON, Popup } from 'react-leaflet';
+import fipsToState from '../../utils/fipsToState';
 
 
 export default function CountyPriceComparison() {
     const [geoData, setGeoData] = useState(null);
+
 
     useEffect(() => {
         fetch("/us_counties_5m.json")
@@ -17,8 +19,8 @@ export default function CountyPriceComparison() {
 
 
         const name = feature.properties.NAME;
-        const state = feature.properties.STATE; //THIS IS JUST A NUMBER IN THE JSON AND I NEED TO SPEND SOME BRAIN POWER TO CORRECT AHHHHHHHHHHHHHHHHHHHHHHHH (BUT its so cool that it works)
-        layer.bindPopup(`<b>${name}, ${state}<b>`);
+        const state = feature.properties.STATE; 
+        layer.bindPopup(`<b>${name}, ${fipsToState[state]}<b>`);
     }
 
     if (!geoData) return null;
