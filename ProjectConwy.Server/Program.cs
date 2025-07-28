@@ -1,6 +1,7 @@
 using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProjectConwy.Server.Data;
+using ProjectConwy.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ if (!string.IsNullOrEmpty(keyVaultName))
 Console.WriteLine("ConnectionString: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddSingleton(new CityPlaceLoader("Resources/city_places_2024.csv"));
 
 var app = builder.Build();
 
