@@ -16,7 +16,7 @@ export default function CountyPriceComparison() {
             .then((geo) => {
                 setGeoData(geo);
 
-                fetch("/api/BaseCountySummary")
+                fetch("/api/BaseCountySummary/state/Kentucky")
                     .then((res) => res.json())
                     .then((summaries) => {
                         setCountySummaries(summaries);
@@ -120,8 +120,8 @@ export default function CountyPriceComparison() {
         if (avgPrice > 800000) return "#800026";
         if (avgPrice > 500000) return "#BD0026";
         if (avgPrice > 300000) return "#E31A1C";
-        if (avgPrice > 150000) return "#FC4E2A";
-        return "#FFEDA0";
+        if (avgPrice > 150000) return "#FFEDA0"; //#FC4E2A
+        return "#90EE90";
     }
 
     function style(feature) {

@@ -3,6 +3,7 @@ import { loginRequest } from "./authConfig";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
+import HouseMap from "./components/RealEstateInteractiveMap";
 import Map from "./components/Map";
 import About from "./components/About";
 import HomeEsitma from "./components/HomeEstimates";
@@ -44,6 +45,7 @@ export default function MainPage() {
     const RenderMainContent = () => {
         switch (activeComponent) {
             case 'home': return <Home />;
+            case 'housemap' : return <HouseMap />;
             case 'map': return <Map />;
             case 'homeestimates': return <HomeEsitma />;
             case 'machinelearning': return <Machine />;

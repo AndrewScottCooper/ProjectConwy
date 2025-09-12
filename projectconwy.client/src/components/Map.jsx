@@ -14,7 +14,8 @@ export default function Map() {
 
     return (
         <div>
-            <h1> MAP</h1>
+            <h1> Maps
+            </h1>
 
             <select value={mode} onChange={e => setMode(e.target.value) }>
                 <option value="county"> Counties </option>
@@ -24,8 +25,8 @@ export default function Map() {
             <MapContainer
                 center={[37.98, -84.20]}
                 zoom={10}
-                style={{height:700, 
-            width:700,
+                style={{height:1000, 
+            width:1000,
             margin: '0 auto',
             display: 'block',
             }}

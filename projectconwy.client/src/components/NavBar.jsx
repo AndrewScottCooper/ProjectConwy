@@ -18,8 +18,15 @@ export default function Navbar({ onSelect }) {
                         },
                     }}
                 >
-                    Home
+                    Dashboard
                 </Button></li>
+
+                <li><Button
+                    variant="contained"
+                    onClick={() => onSelect('housemap')}
+                    sx={{ backgroundColor: '#808080', '&:hover': { backgroundColor: '#6a0dad' } }}
+                >Homes</Button></li>
+
 
                 <li><Button
                     variant="contained"

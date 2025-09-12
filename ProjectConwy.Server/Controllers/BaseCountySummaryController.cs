@@ -27,61 +27,55 @@ namespace ProjectConwy.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCountySummaries()
+        [HttpGet("state/{state}")]
+        public async Task<IActionResult> GetCountySummaries(string state)
         {
-         
-            var groupedListings = await _context.LargeRealEstateListings
-                .Where(t => t.State == "Kentucky" && t.City != null && t.Price != null)
-                .GroupBy(t => new { t.State, t.City })
-                .Select(g => new
-                {
-                    g.Key.State,
-                    g.Key.City,
-                    Prices = g.Select(x => x.Price).Where(p => p != null).ToList()
-                })
-                .ToListAsync();
 
-            Console.WriteLine($"Grouped KY cities: {groupedListings.Count}");
+            var grouped = await _context.LargeRealEstateListings
+         .Where(t => t.State == state && t.City != null && t.Price != null)
+         .Select(t => new { t.State, t.City, t.Price })   // <- keeps result small
+         .AsNoTracking()
+         .ToListAsync();
 
             var cityData = _cityPlaceLoader.GetAll();
 
-            var unmatchedCities = new List<string>();
             var results = new List<BaseCountySummary>();
-            foreach (var group in groupedListings)
+            var unmatched = new List<string>();
+
+            foreach (var g in grouped.GroupBy(x => new { x.State, x.City }))
             {
-                if (group.Prices.Count == 0) continue;
+                var prices = g.Select(x => x.Price!.Value).OrderBy(v => v).ToList();
+                if (prices.Count == 0) continue;
 
-                var matchedPlace = CityMatcher.Match(group.City, group.State, cityData);
+                var median = (prices.Count % 2 == 0)
+                    ? (prices[prices.Count / 2 - 1] + prices[prices.Count / 2]) / 2.0
+                    : prices[prices.Count / 2];
 
+                var matchedPlace = CityMatcher.Match(g.Key.City!, g.Key.State!, cityData);
                 if (matchedPlace != null)
                 {
-                    var sorted = group.Prices.OrderBy(p => p.Value).ToList();
-                    var median = sorted.Count % 2 == 0
-                        ? (sorted[sorted.Count / 2 - 1].Value + sorted[sorted.Count / 2].Value) / 2
-                        : sorted[sorted.Count / 2].Value;
-
                     results.Add(new BaseCountySummary
                     {
-                        State = group.State,
-                        County = group.City,
-                        AvgPrice = group.Prices.Average(p => p.Value),
+                        State = g.Key.State!,
+                        County = g.Key.City!,
+                        AvgPrice = prices.Average(),
                         MedianPrice = median,
-                        ListingCount = group.Prices.Count,
+                        ListingCount = prices.Count,
                         Latitude = matchedPlace.Latitude,
                         Longitude = matchedPlace.Longitude
                     });
                 }
-
-                if (matchedPlace == null)
+                else
                 {
-                    unmatchedCities.Add($"{group.City}, {group.State}");
+                    unmatched.Add($"{g.Key.City}, {g.Key.State}");
                 }
             }
 
-            _logger.LogInformation("Unmatched cities: {Cities}", string.Join("; ", unmatchedCities));
-            _logger.LogInformation("Returning {Count} KY summaries", results.Count);
+            _logger.LogInformation("Unmatched cities: {Cities}", string.Join("; ", unmatched));
             return Ok(results);
         }
     }
+
+
+
 }
