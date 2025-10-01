@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css'
+import FeaturedHouseCard from "../components/main_page_components/FeaturedHouseCard";
 
 
 export default function Home() {
@@ -43,7 +44,9 @@ export default function Home() {
                 <div className={styles.card}>New Messages</div>
                 <div className={styles.card}>System Updates</div>
                 <div className={styles.card}>Notifications</div>
-                <div className={styles.card}>House of the day</div>
+                <div className={styles.card}>Featured Home:
+                    <FeaturedHouseCard state="KY" />
+                </div>
                 <div className={styles.card}> Something more interesting here</div>
                 <div className={styles.card}>AAAAA
                 <p> testy westy</p>

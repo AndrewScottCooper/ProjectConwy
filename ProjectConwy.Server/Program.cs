@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var keyVaultName = builder.Configuration["KeyVaultName"]; // Store this in appsettings.json or as an env variable
+var keyVaultName = builder.Configuration["KeyVaultName"];
 if (!string.IsNullOrEmpty(keyVaultName))
 {
     var keyVaultUri = $"https://{keyVaultName}.vault.azure.net/";

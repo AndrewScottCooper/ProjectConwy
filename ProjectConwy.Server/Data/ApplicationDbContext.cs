@@ -10,5 +10,7 @@ namespace ProjectConwy.Server.Data
         }
         public DbSet<LargeRealEstateListings> LargeRealEstateListings { get; set; }
 
+        public DbSet<RealListing> RealListings => Set<RealListing>();
+
     }
 }
