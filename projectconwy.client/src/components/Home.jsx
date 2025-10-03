@@ -15,11 +15,11 @@ export default function Home() {
         })
             .then(res => {
                 if (!res.ok) throw new Error("Request failed");
-                return res.json();             // <-- returns an array
+                return res.json();             
             })
             .then(rows => {
                 const first = rows?.[0] || null;
-                setListing(first);             // { city, zipCode, price, bed, bath, ... }
+                setListing(first);             
                 console.timeEnd("KY fetch");
                 console.log(first);
             })
@@ -49,12 +49,12 @@ export default function Home() {
                 </div>
                 <div className={styles.card}> Something more interesting here</div>
                 <div className={styles.card}>AAAAA
-                <p> testy westy</p>
+                <p> This will be a real feature soon. If you see this you're pretty early and please come back to see when its more fleshed out.</p>
                 </div>
             </div>
 
             <div className={styles.chartSection}>  
-                <p>[Charts and fun stuff UwU]</p>
+                <p>[Charts and fun stuff please come back later]</p>
             </div>
         </div>
     );

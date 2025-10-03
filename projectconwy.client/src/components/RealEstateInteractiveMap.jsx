@@ -131,7 +131,11 @@ export default function RealEstateInteractiveMap() {
                                     {m.addressLine1}, {m.city ?? ""} {m.stateCode}
                                 </div>
 
-                                {/* Link to a full details page */}
+                                {/* Link to a full details page... Dreading doing this
+                                    I dont want to do routing but doing a single page would kinda mess the user up on wanting to go back.
+                                    Maybe I have a button that takes them back to this map? That'd probably be my fastest way to ship this feature
+                                */}
+                               
                                 <div style={{ marginTop: 6 }}>
                                     <a href={`/listing/${m.id}`}>View details</a>
                                 </div>

@@ -28,7 +28,7 @@ export default function CountyPriceComparison() {
     }, []);
 
     function buildCountyMatchMap(geoData, summaries) {
-        const resultMap = {}; //THIS IS A STUPID FIX AND I SHOULD FEEL HORRIBLE FOR DOING IT TOMORROW I AM FINDING A BETTER WAY
+        const resultMap = {}; //THIS IS A STUPID FIX AND I SHOULD FEEL HORRIBLE FOR DOING IT. I NEED TO JUST MAP OUT CITY/COUNTY
         const hardcodedCountyOverrides = {
             "lexington": "0500000US21067",
             "lexington-fayette": "0500000US21067", 
